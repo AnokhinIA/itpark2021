@@ -37,7 +37,7 @@ public class SecondProgram {
     /**
      * Формула расчета затрат на бензин
      * @param fuelConsumption - средний расход топлива автомобиля на 100 км
-     * @param distance - расстояния
+     * @param distance - расстояние
      * @param fuelPrice - стоимость топлива
      */
     public static int fuelCharge(int fuelConsumption, int distance, int fuelPrice) {
