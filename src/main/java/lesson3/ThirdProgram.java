@@ -1,5 +1,5 @@
 package lesson3;
-// Решение квадратного уравления
+// Решение квадратного уравления.
 public class ThirdProgram {
     public static void main(String[] args) {
         solutionOfQuadraticEquation(2, 16, 18);
