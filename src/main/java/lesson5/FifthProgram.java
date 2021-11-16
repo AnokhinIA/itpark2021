@@ -8,7 +8,7 @@ public class FifthProgram {
         System.out.println("Введите номер члена последовательности ряда Фибоначчи (от 2 до n):");
         while (!scanner.hasNextInt()) {
             String number = scanner.next();
-            System.out.println("Введено некорректное значение: " + number + " Ожидается целое число.");
+            System.out.println("Введено некорректное значение:  " + number + " Ожидается целое число.");
         }
         int value = scanner.nextInt();
         System.out.println(calculateOfValueFibonacci(value));
