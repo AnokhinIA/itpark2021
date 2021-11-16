@@ -3,7 +3,7 @@ package lesson3;
 public class ThirdProgram {
     public static void main(String[] args) {
 
-        solutionOfQuadraticEquation(2, 16, 18);
+        solutionOfQuadraticEquation(2, -16, 18);
         System.out.println(resultOfFactorial(5));
     }
 
