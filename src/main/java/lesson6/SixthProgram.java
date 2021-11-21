@@ -24,28 +24,28 @@ public class SixthProgram {
         System.out.println("Максимальное значение массива: " + maxValueFromDim(dim));
         System.out.println("-------------------");
         System.out.println("Среднее значение массива: " + avgValueFromDim(dim));
-        }
+    }
 
     private static double avgValueFromDim(double[] dim) {
         double result = dim[0];
-        for (int i = 1; i < dim.length; i++){
+        for (int i = 1; i < dim.length; i++) {
             result += dim[i];
         }
-        result = result/dim.length;
+        result = result / dim.length;
         return result;
     }
 
     private static double maxValueFromDim(double[] dim) {
         double result = dim[0];
-        for (int i = 1; i < dim.length; i++){
+        for (int i = 1; i < dim.length; i++) {
             if (result < dim[i]) result = dim[i];
         }
         return result;
     }
 
-    public static double minValueFromDim(double[] dim){
+    public static double minValueFromDim(double[] dim) {
         double result = dim[0];
-        for (int i = 1; i < dim.length; i++){
+        for (int i = 1; i < dim.length; i++) {
             if (result > dim[i]) result = dim[i];
         }
         return result;
