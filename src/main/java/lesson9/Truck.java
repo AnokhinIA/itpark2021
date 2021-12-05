@@ -5,8 +5,8 @@ public class Truck extends Automobile {
 
     @Override
     void move(double distance) {
-        if (distance >= 200) {
-            System.out.println("Максимум для " + type + " 200 км., а у вас: " + distance);
+        if (distance >= 1200) {
+            System.out.println("Максимум для " + type + " 1200 км., а у вас: " + distance);
         } else {
             System.out.println(type + " проехал: " + distance);
         }
