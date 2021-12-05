@@ -12,6 +12,11 @@ public class Car extends Automobile {
         }
     }
 
+    @Override
+    int parking(int distance2) {
+        return 0;
+    }
+
     public void setType(String type) {
         this.type = type;
     }
