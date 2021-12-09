@@ -15,8 +15,7 @@ public class Truck extends Automobile {
 
     @Override
     int parking(int distance2) {
-        distance2 = distance2 /2;
-        return distance2;
+        return distance2 /2;
     }
 
     public void setType(String type) {
