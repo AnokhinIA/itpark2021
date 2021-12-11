@@ -17,7 +17,7 @@ public class CarRunner {
             totalHeight = Math.random() * 4;
             fullWidth = Math.random() * 4;
             totalLength = Math.random() * 4;
-            speed = Math.random() * 100;
+            speed = Math.random() * 150;
 
             cars[i] = new Car(numberPlate[i], wight, totalHeight, fullWidth, totalLength, speed, true, model[i]);
 
