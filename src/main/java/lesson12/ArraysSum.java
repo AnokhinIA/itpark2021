@@ -13,7 +13,7 @@ public class ArraysSum {
         }
     }
 
-    public int sum() {
+    public int sum()  {
         checkArray();
         int sum = 0;
         for (int j = 0; j < 4; j++) {
