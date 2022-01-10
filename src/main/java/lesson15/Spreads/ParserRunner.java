@@ -1,4 +1,4 @@
-package lesson15_разработка;
+package lesson15.Spreads;
 
 import java.util.*;
 import java.util.function.Function;
