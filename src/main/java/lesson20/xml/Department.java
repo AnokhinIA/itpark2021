@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 
 public class Department {
-private String unit;
-private String town;
+    private String unit;
+    private String town;
 }
