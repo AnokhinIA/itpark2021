@@ -11,17 +11,21 @@ package lesson20.xml;
  */
 
 import jakarta.xml.bind.*;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.StringWriter;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.*;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 public class JaxbRunner {
-    public static void main(String[] args) throws JAXBException, IOException {
-        Position[] positions = {
+    public static void main(String[] args) throws Exception {
+       Position[] positions = {
                 new Position("Специалист", 50000),
                 new Position("Главный специалист", 80000),
                 new Position("Руководитель", 150000),
@@ -35,7 +39,7 @@ public class JaxbRunner {
         };
 
         Employee[] employees = new Employee[20];
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             int j = new Random().nextInt(4);
             employees[i] = new Employee();
             employees[i].setEmployeeID(i);
@@ -64,5 +68,37 @@ public class JaxbRunner {
         while (scan.hasNextLine()) {
             System.out.println(scan.nextLine());
         }
+
+        //С помощью XPath выражения найти всех сотрудников, у которых зарплата превышает среднее значение
+
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = builder.parse(new File("src/main/resources/employee.xml"));
+
+        XPathFactory xpathfactory = XPathFactory.newInstance();
+        XPath xpath = xpathfactory.newXPath();
+
+        double avg = (Double) xpath.compile("sum(//Position/salary) div count(//Position/salary)").evaluate(doc, XPathConstants.NUMBER);
+
+        System.out.println(" ");
+        System.out.println("Среднее значение зарплаты: " + avg);
+        System.out.println(" " );
+        System.out.println("Сотрудники с заработной платой выше средней: " );
+
+        XPathExpression expr = xpath.compile("//Employee/Position[salary >" + avg +"]");
+        Object resultXls = expr.evaluate(doc, XPathConstants.NODESET);
+        NodeList nodes = (NodeList) resultXls;
+
+        for (int i = 0; i < nodes.getLength(); i++) {
+            System.out.println(i + 1 + ". " +
+                               nodes.item(i).
+                               getParentNode().
+                               getChildNodes().
+                               item(5).
+                               getTextContent() +
+                               nodes.item(i).getTextContent());
+
+        }
+
+
     }
 }
