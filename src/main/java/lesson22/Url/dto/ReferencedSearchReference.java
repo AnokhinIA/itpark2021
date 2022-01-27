@@ -6,6 +6,6 @@ public class ReferencedSearchReference {
     public String referenced_id; // 	string 	false 	The id of the referenced object.
     public String referenced_class; //	string 	false 	The type of the referenced object.
 
-    public ReferencedSearchReference(){
+    public ReferencedSearchReference() {
     }
 }

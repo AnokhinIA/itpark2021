@@ -16,8 +16,15 @@ https://api.openweathermap.org/data/2.5/weather?q=Samara&appid=<api_key>&units=m
  */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import lesson22.Url.dto.Data;
+import lesson22.Url.dto.SearchReferences;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
@@ -35,12 +42,17 @@ public class UrlRunner {
         URLConnection tradeConnection = trade.openConnection();
         tradeConnection.connect();
         Scanner tradeScanner = new Scanner(tradeConnection.getInputStream());
-        while (tradeScanner.hasNextLine()){
-            System.out.println(tradeScanner.nextLine());
+        String json = "";
+        while (tradeScanner.hasNextLine()) {
+            json += tradeScanner.nextLine();
         }
-
+        System.out.println(json);
+        /*Разберем JSON
+        Gson gson = new Gson();
+        Data data = gson.fromJson(json,Data.class);
+        */
         ObjectMapper mapper = new ObjectMapper();
-        Data names = mapper.readValue(trade, Data.class);
+        Data data = mapper.readValue(trade, Data.class);
 
     }
 }

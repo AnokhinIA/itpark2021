@@ -1,10 +1,11 @@
 package lesson22.Url.dto;
 
 
-public class Data {
-    public SearchReferences[] data;
+import java.util.List;
 
- public Data(){
- }
+@lombok.Data
+
+public class Data {
+    public List<SearchReferences> data;
 
 }
