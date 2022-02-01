@@ -15,19 +15,16 @@ https://api.openweathermap.org/data/2.5/weather?q=Samara&appid=<api_key>&units=m
 4*. Для транслитерации текста рекомендую воспользоваться библиотекой icu4j или справочник городов
  */
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import lesson22.Url.dto.Data;
+import lesson22.Url.dto.ReferencedSearchReference;
 import lesson22.Url.dto.SearchReferences;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Scanner;
+import java.util.*;
 
 public class UrlRunner {
     public static void main(String[] args) throws IOException {
@@ -47,12 +44,49 @@ public class UrlRunner {
             json += tradeScanner.nextLine();
         }
         System.out.println(json);
-        /*Разберем JSON
-        Gson gson = new Gson();
-        Data data = gson.fromJson(json,Data.class);
-        */
-        ObjectMapper mapper = new ObjectMapper();
-        Data data = mapper.readValue(trade, Data.class);
+        //Разберем JSON
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(SearchReferences.class, new SearchReferencesDeserializer())
+                .registerTypeAdapter(ReferencedSearchReference.class, new ReferencedSearchReferenceDeserializer())
+                .setPrettyPrinting()   //про это еще надо прочитать подробнее
+                .create();
 
+        Data data = gson.fromJson(json, Data.class);
+
+        for (SearchReferences i:data.data){
+            System.out.println(i);
+        }
+    }
+
+}
+
+class SearchReferencesDeserializer implements JsonDeserializer<SearchReferences> {
+
+    @Override
+    public SearchReferences deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
+        JsonObject jsonObject = json.getAsJsonObject();
+        SearchReferences searchReferences = new SearchReferences();
+        searchReferences.setId(jsonObject.get("id").getAsString());
+        searchReferences.setType(jsonObject.get("type").getAsString());
+
+        //
+        //TODO Найти, как обработать встроенную коллекцию
+        //
+
+
+        return searchReferences;
+    }
+}
+
+class ReferencedSearchReferenceDeserializer implements JsonDeserializer<ReferencedSearchReference> {
+
+    @Override
+    public ReferencedSearchReference deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
+        JsonObject jsonObject = json.getAsJsonObject();
+        ReferencedSearchReference referencedSearchReference = new ReferencedSearchReference();
+        referencedSearchReference.setReferenced_id(jsonObject.get("referenced_id").getAsString());
+        referencedSearchReference.setTitle(jsonObject.get("title").getAsString());
+        referencedSearchReference.setReferenced_class(jsonObject.get("referenced_class").getAsString());
+        return referencedSearchReference;
     }
 }
