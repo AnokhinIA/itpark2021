@@ -1,5 +1,8 @@
 package lesson22.Url.dto;
 
+import lombok.Data;
+
+@Data
 public class ReferencedSearchReference {
 
     public String title; // 	string 	false 	The title of referenced object.
