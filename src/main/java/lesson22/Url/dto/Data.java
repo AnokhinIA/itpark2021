@@ -1,12 +1,7 @@
 package lesson22.Url.dto;
 
-
-import java.util.List;
-
-@lombok.Data
+import java.util.ArrayList;
 
 public class Data {
-
-    public List<SearchReferences> data;
-
+    public ArrayList<SearchReferences> data;
 }
